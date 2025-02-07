@@ -1,0 +1,28 @@
+{
+  "name": "odin-battleship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve",
+    "test": "jest",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack serve --config webpack.dev.js",
+    "deploy-gh": "git subtree push --prefix dist origin gh-pages",
+    "commit-dist": "git add --force dist && git commit -m 'Initial dist subtree commit'",
+    "delete-dist": "rm -rf dist",
+    "delete-gh": "git push origin --delete gh-pages"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "jest": "^29.7.0"
+  },
+  "description": ""
+}
