@@ -1,6 +1,23 @@
-import "./styles.css";
+// import "./styles.css";
 
-function sum(a, b) {
-    return a + b;
+// tried using data types for constructor values, that is where typescript is used
+class Ship {
+  constructor(size, hits = 0) {
+    this.size = size;
+    this.hits = hits;
   }
-export {sum}
+
+  hit() {
+    this.hits += 1;
+  }
+
+  isSunk() {
+    return this.hits >= this.size;
+  }
+}
+
+export { Ship };
+
+// class Gameboard {
+//     constructor()
+// }
