@@ -1,8 +1,12 @@
+import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship.js";
 
 class Game {
   constructor(dimensions) {
-    this.players = [new Player("Player 1", dimensions), new Player("Player 2", dimensions)];
+    this.players = [
+      new Player("Player 1", dimensions),
+      new Player("Player 2", dimensions),
+    ];
     this.players[0].turn = true;
   }
 
@@ -12,6 +16,7 @@ class Game {
     this.players[0].placeShip(2, "vertical", [3, 3]);
     this.players[1].placeShip(3, "horizontal", [0, 0]);
     this.players[1].placeShip(2, "vertical", [2, 2]);
+    this.renderBoards();
   }
 
   handleTurn(playerIndex, coordinates) {
@@ -27,9 +32,71 @@ class Game {
 
     this.players[playerIndex].turn = false;
     this.players[(playerIndex + 1) % 2].turn = true;
+    this.renderBoards();
     return false;
   }
+  renderBoards() {
+    this.players.forEach((player, index) => {
+      const boardElement = document.getElementById(`player${index + 1}-board`);
+      boardElement.innerHTML = "";
+      player.gameboard.grid.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+          const cellElement = document.createElement("div");
+          cellElement.classList.add("cell"); // add default cell
+          if (
+            cell !== null &&
+            typeof cell === "object" // if grid cell is ship object
+          ) {
+              if (cell.hit) {
+                cellElement.classList.add("hit");
+              }
+              else if (!cell.hit) {
+                cellElement.classList.add("ship");
+              }
+          } else if (cell === "miss") {
+            cellElement.classList.add("miss");
+          }
+          cellElement.addEventListener("click", () => {
+            if (this.players[index].turn) {
+              this.handleTurn(index, [rowIndex, colIndex]);
+            }
+          });
+          boardElement.appendChild(cellElement);
+        });
+      });
+    });
+  }
+
+  // renderBoards() {
+  //   this.players.forEach((player, index) => {
+  //     const boardElement = document.getElementById(`player${index + 1}-board`);
+  //     boardElement.innerHTML = "";
+  //     player.gameboard.grid.forEach((row, rowIndex) => {
+  //       row.forEach((cell, colIndex) => {
+  //         const cellElement = document.createElement("div");
+  //         cellElement.classList.add("cell");
+  //         if (cell === "miss") {
+  //           cellElement.classList.add("miss");
+  //         } else if (typeof cell === "object" && cell.hit) {
+  //           cellElement.classList.add("hit");
+  //         } else if (typeof cell === "object" && !cell.hit) {
+  //           cellElement.classList.add("ship");
+  //         }
+  //         cellElement.addEventListener("click", () => {
+  //           if (this.players[index].turn) {
+  //             this.handleTurn(index, [rowIndex, colIndex]);
+  //           }
+  //         });
+  //         boardElement.appendChild(cellElement);
+  //       });
+  //     });
+  //   });
+  // }
 }
 
-const game1 = new Game([8,8])
+const game1 = new Game([8, 8]);
 game1.start();
+const currentPlayer = game1.players.find((player) => player.turn);
+if (currentPlayer) {
+  console.log(`${currentPlayer.name}'s turn`);
+}
