@@ -1,4 +1,4 @@
-import { Ship } from "./index";
+import { Ship } from "./battleship";
 
 test("Ship hit method increases hits", () => {
   const ship = new Ship(3);
