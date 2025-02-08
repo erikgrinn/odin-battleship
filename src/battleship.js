@@ -18,10 +18,13 @@ class Ship {
 
 
 class Gameboard {
-    constructor(rows, cols, ) {
-
+    constructor(rows, cols) {
+      this.rows = rows;
+      this.cols = cols
+      this.grid = Array.from({ length: rows }, () => Array(cols).fill(null));
+      this.ships = [];
     }
 }
 
-export { Ship };
+export { Ship, Gameboard };
 
