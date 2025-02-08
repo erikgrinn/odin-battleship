@@ -1,6 +1,6 @@
 // import "./styles.css";
 
-// tried using data types for constructor values, that is where typescript is used
+// tried using data type validation, that is where typescript is used
 class Ship {
   constructor(size) {
     this.size = size;
@@ -74,6 +74,7 @@ class Gameboard {
     }
   }
 
+  // here or in index.js?
   display() {
     this.grid.forEach((row) => {
       console.log(
@@ -115,4 +116,4 @@ class Player {
   }
 }
 
-export { Ship, Gameboard };
+export { Ship, Gameboard, Player };
