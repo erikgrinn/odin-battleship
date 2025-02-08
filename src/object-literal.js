@@ -1,3 +1,5 @@
+// can also use factory functions instead of classes
+
 class Ship {
   constructor(size) {
     this.size = size;
@@ -12,6 +14,9 @@ class Ship {
     return this.hits >= this.size;
   }
 }
+
+// Another way to do this is to make a gridCell class
+
 
 class Gameboard {
   constructor(rows, cols) {
@@ -91,8 +96,9 @@ class Gameboard {
 }
 
 class Player {
-  constructor(name) {
+  constructor(name, dimensions) {
     this.name = name;
+    const [rows, cols] = dimensions; // Unpack dimensions into rows and cols
     this.gameboard = new Gameboard(10, 10);
     this.turn = false;
   }
