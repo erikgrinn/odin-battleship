@@ -1,8 +1,8 @@
 import { Ship, Gameboard, Player } from "./battleship.js";
 
 class Game {
-  constructor() {
-    this.players = [new Player("Player 1"), new Player("Player 2")];
+  constructor(dimensions) {
+    this.players = [new Player("Player 1", dimensions), new Player("Player 2", dimensions)];
     this.players[0].turn = true;
   }
 
@@ -31,5 +31,5 @@ class Game {
   }
 }
 
-const game1 = new Game()
-Game.start();
+const game1 = new Game([8,8])
+game1.start();
